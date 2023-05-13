@@ -6,8 +6,8 @@ const BundleAnalyzerPlugin =
 module.exports = {
   mode: "production",
   entry: {
-    app: { import: "./src/Entry.tsx", dependOn: "vendor" },
-    vendor: ["react", "react-dom"],
+    app: { import: "./src/Entry.tsx" }, // , dependOn: "vendor" },
+    // vendor: ["react", "react-dom"],
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -35,6 +35,18 @@ module.exports = {
     hot: true, // Enable hot reloading
     compress: true, // Enable gzip compression for everything served
     open: true, // Open the default browser on startup
+  },
+  optimization: {
+    minimize: true, // Minimize the bundle using Terser
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: "react",
+          chunks: "all",
+        },
+      },
+    },
   },
   module: {
     rules: [
