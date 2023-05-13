@@ -16,4 +16,12 @@ module.exports = merge(common, {
     compress: true, // Enable gzip compression for everything served
     open: true, // Open the default browser on startup
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 });
