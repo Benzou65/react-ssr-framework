@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   mode: "production",
@@ -12,7 +14,17 @@ module.exports = {
     filename: "[name].bundle.js",
     clean: true, // Clean the /dist folder before each build
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      openAnalyzer: false,
+      defaultSizes: "gzip",
+      generateStatsFile: true,
+      statsFilename: "stats.json",
+      reportFilename: "analyze/report.html",
+    }),
+  ],
   devServer: {
     static: {
       directory: path.resolve(__dirname, "./dist"),
