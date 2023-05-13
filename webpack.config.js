@@ -30,8 +30,11 @@ module.exports = {
       directory: path.resolve(__dirname, "./dist"),
     },
     client: {
-      overlay: false,
+      overlay: false, // Hide errors from the browser
     },
+    hot: true, // Enable hot reloading
+    compress: true, // Enable gzip compression for everything served
+    open: true, // Open the default browser on startup
   },
   module: {
     rules: [
